@@ -30,8 +30,13 @@ function CarCard(props: CarCardProps) {
         </div>
       </CardHeader>
       <CardBody>
-        <div>
-          <Image className="img" src={props.image} alt="car"></Image>
+        <div className="unset-img">
+          <Image
+            className="custom-img"
+            src={props.image}
+            layout="fill"
+            alt="car"
+          ></Image>
         </div>
       </CardBody>
       <DivCardFooter>

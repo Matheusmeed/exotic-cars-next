@@ -13,9 +13,12 @@ export const Container = styled.ul`
   justify-content: center;
 `;
 
-export const ScrollButton = styled.img`
+export const ScrollButton = styled.div`
   cursor: pointer;
   position: fixed;
   bottom: 5%;
   right: 5%;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
 `;

@@ -33,7 +33,7 @@ export const CarHeader = styled.div`
   padding-top: 35px;
   padding-left: 60px;
 
-  img {
+  .img {
     height: 90px;
   }
 
@@ -43,7 +43,7 @@ export const CarHeader = styled.div`
     justify-content: center;
     margin-bottom: 20px;
 
-    img {
+    .img {
       height: 70px;
     }
   }
@@ -84,14 +84,14 @@ export const CarImgDiv = styled.div`
     margin-top: 5px;
   }
 
-  img {
+  .img {
     margin-bottom: 3px;
     max-height: 250px;
     min-height: 250px;
   }
 
   @media (max-width: 800px) {
-    img {
+    .img {
       width: 300px;
       max-height: none;
       min-height: auto;

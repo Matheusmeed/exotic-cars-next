@@ -20,7 +20,7 @@ function ColorCarList() {
         return (
           <div key={el.id}>
             <MainSquare>
-              <Image src={el.image} alt="car" />
+              <Image className="img" src={el.image} alt="car" />
             </MainSquare>
           </div>
         );
@@ -28,7 +28,7 @@ function ColorCarList() {
         return (
           <div key={el.id}>
             <Square onClick={() => dispatch(setCarColor(el.id))}>
-              <Image src={el.image} alt="car" />
+              <Image className="img" src={el.image} alt="car" />
             </Square>
           </div>
         );

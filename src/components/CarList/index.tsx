@@ -5,15 +5,20 @@ import { setSelectedCar } from "store/Stock.store";
 import { CarCard } from "components/index";
 import { group } from "assets";
 import { Container, ScrollButton } from "./styles";
+import Image from "next/image";
+import { getCars } from "shared/services/cars";
+import { api } from "shared";
 
 function CarList() {
   const dispatch = useDispatch();
   const [cars, setCars] = useState<CarsType>();
 
   useEffect(() => {
-    fetch("./cars.json")
-      .then((res) => res.json())
-      .then((res) => setCars(res))
+    api
+      .get("/cars")
+      .then((res) => {
+        setCars(res.data);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -49,10 +54,9 @@ function CarList() {
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
-        src={group}
-        alt="scroll up"
-        width={100}
-      />
+      >
+        <Image src={group} alt="scroll up" width={100} />
+      </ScrollButton>
     </Container>
   );
 }
