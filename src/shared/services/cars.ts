@@ -1,10 +1,10 @@
 import api from "./api";
 
-export async function getCars(setCars: Function) {
+export async function getCars() {
   const response = await api
     .get("/cars")
     .then((res) => res.data)
-    .catch(() => false);
+    .catch((error) => console.log(error));
 
-  setCars(response);
+  return response;
 }

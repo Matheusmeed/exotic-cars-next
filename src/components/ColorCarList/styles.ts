@@ -46,7 +46,7 @@ export const MainSquare = styled.div`
   align-items: center;
   animation: 0.5s ${pulseAnimation};
 
-  .img {
+  img {
     width: 260px;
   }
 
@@ -56,7 +56,7 @@ export const MainSquare = styled.div`
     margin-left: 20px;
     margin-right: 20px;
 
-    .img {
+    img {
       width: 120px;
     }
   }
@@ -73,7 +73,7 @@ export const Square = styled.div`
   display: flex;
   align-items: center;
 
-  .img {
+  img {
     width: 200px;
   }
 

@@ -46,18 +46,18 @@ export const CardBody = styled.div`
     align-items: center;
   }
 
-  div .img {
+  div img {
     width: 240px;
   }
 
   @media (max-width: 970px) {
-    div .img {
+    div img {
       width: 180px;
     }
   }
 
   @media (max-width: 500px) {
-    div .img {
+    div img {
       width: 160px;
     }
   }

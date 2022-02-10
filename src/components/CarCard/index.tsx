@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   BookNow,
   CarBrand,
@@ -13,7 +14,6 @@ import {
 } from "./styles";
 import { FaEllipsisH } from "react-icons/fa";
 import { CarCardProps } from "@types";
-import Image from "next/image";
 
 function CarCard(props: CarCardProps) {
   return (
@@ -30,13 +30,8 @@ function CarCard(props: CarCardProps) {
         </div>
       </CardHeader>
       <CardBody>
-        <div className="unset-img">
-          <Image
-            className="custom-img"
-            src={props.image}
-            layout="fill"
-            alt="car"
-          ></Image>
+        <div>
+          <img src={props.image} alt="car"></img>
         </div>
       </CardBody>
       <DivCardFooter>

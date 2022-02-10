@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import { ArrowButton, Container, MainSquare, Square } from "./styles";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import { setCarColor } from "store/Stock.store";
-import Image from "next/image";
 
 function ColorCarList() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function ColorCarList() {
         return (
           <div key={el.id}>
             <MainSquare>
-              <Image className="img" src={el.image} alt="car" />
+              <img className="img" src={el.image} alt="car" />
             </MainSquare>
           </div>
         );
@@ -28,7 +28,7 @@ function ColorCarList() {
         return (
           <div key={el.id}>
             <Square onClick={() => dispatch(setCarColor(el.id))}>
-              <Image className="img" src={el.image} alt="car" />
+              <img src={el.image} alt="car" />
             </Square>
           </div>
         );

@@ -15,12 +15,19 @@ import { locationIcon, calendarIcon, searchIcon } from "assets";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 function Header() {
+  const router = useRouter();
+
   return (
     <>
       <HeaderDiv>
-        <ButtonTitle>
+        <ButtonTitle
+          onClick={() => {
+            router.push("/");
+          }}
+        >
           <Title>EXOTIC</Title> <Title2>CARS</Title2>
         </ButtonTitle>
 
