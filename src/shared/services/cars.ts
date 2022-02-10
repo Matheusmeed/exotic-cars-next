@@ -1,10 +1,8 @@
 import api from "./api";
 
 export async function getCars() {
-  const response = await api
-    .get("/cars")
-    .then((res) => res.data)
-    .catch((error) => console.log(error));
+  const response = await api.get("/cars");
+  const data = response.data.data;
 
-  return response;
+  return data;
 }

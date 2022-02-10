@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import { GetStaticProps } from "next";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { CarsType } from "@types";
 import { setSelectedCar } from "store/Stock.store";
@@ -11,23 +10,18 @@ import Image from "next/image";
 import { getCars } from "shared/services/cars";
 import { api } from "shared";
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const data = await getCars();
-  console.log(data);
-  return {
-    props: {
-      cars: data,
-    },
-  };
-};
-
-function CarList(props: { cars: CarsType }) {
-  const router = useRouter();
+function CarList() {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const [cars, setCars] = useState<CarsType>();
+
+  useEffect(() => {
+    api.get("/cars").then((res) => setCars(res.data));
+  }, []);
 
   return (
     <Container>
-      {props.cars?.data.map((car) => {
+      {cars?.data.map((car) => {
         return (
           <CarCard
             key={car.id}
@@ -43,18 +37,14 @@ function CarList(props: { cars: CarsType }) {
                   colors: car.colors,
                 })
               );
-              router.push(
-                `/selected/${car.brand.split(" ").join("_")}-${car.name
-                  .split(" ")
-                  .join("_")}`
-              );
+              router.push(`/selected/${car.id}`);
             }}
             brand={car.brand}
             name={car.name}
             price={car.price}
             image={car.image}
             id={car.id}
-            last={car.id === props.cars.data.length}
+            last={car.id === cars.data.length}
           />
         );
       })}
