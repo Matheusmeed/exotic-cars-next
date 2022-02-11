@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { CarsType } from "@types";
 import { setSelectedCar } from "store/Stock.store";
@@ -7,21 +6,18 @@ import { group } from "assets";
 import { Container, ScrollButton } from "./styles";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { getCars } from "shared/services/cars";
-import { api } from "shared";
 
-function CarList() {
+type Props = {
+  cars: CarsType;
+};
+
+function CarList({ cars }: Props) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [cars, setCars] = useState<CarsType>();
-
-  useEffect(() => {
-    api.get("/cars").then((res) => setCars(res.data));
-  }, []);
 
   return (
     <Container>
-      {cars?.data.map((car) => {
+      {cars.data.map((car) => {
         return (
           <CarCard
             key={car.id}
