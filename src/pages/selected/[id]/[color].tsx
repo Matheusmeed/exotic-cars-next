@@ -23,10 +23,22 @@ import { setSelectedCar } from "store/Stock.store";
 
 type Props = {
   car: Data;
+  color: string;
 };
 
-function SelectedCar({ car }: Props) {
+function SelectedCar({ car, color }: Props) {
   const router = useRouter();
+
+  function renderImg() {
+    let imgUrl;
+
+    car.colors.forEach((el) => {
+      if (el.id === color) {
+        imgUrl = el.image;
+      }
+    });
+    return imgUrl;
+  }
 
   return (
     <>
@@ -54,7 +66,9 @@ function SelectedCar({ car }: Props) {
           </div>
           <CarImgDiv>
             <img
-              src={car.colors[Math.round(car.colors.length / 2 - 1)].image}
+              src={renderImg()}
+              // car.colors[Math.round(car.colors.length / 2 - 1)].image
+
               alt="carro"
             />
             <div>
@@ -73,21 +87,22 @@ function SelectedCar({ car }: Props) {
             </div>
           </CarColorDiv>
         </CarDiv>
-        {/* <ColorCarList /> */}
+        <ColorCarList car={car} color={color} />
       </Container>
     </>
   );
 }
 
-export const getStaticProps = async (context: { params: { id: string } }) => {
+export const getStaticProps = async (context: {
+  params: { id: string; color: string };
+}) => {
   const id = Number(context.params.id);
+  const color = context.params.color;
   const cars = await getCars();
   const car = cars.data[id - 1];
 
-  console.log(car);
-
   return {
-    props: { car },
+    props: { car, color },
     revalidate: 60000,
   };
 };

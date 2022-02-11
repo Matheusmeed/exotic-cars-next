@@ -1,21 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import { ArrowButton, Container, MainSquare, Square } from "./styles";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "store";
 import { setCarColor } from "store/Stock.store";
+import { Data } from "@types";
+import { useRouter } from "next/router";
 
-function ColorCarList() {
-  const dispatch = useDispatch();
-  const selectedCarInfo = useSelector(
-    (state: RootState) => state.stock.selectedCarInfo
-  );
+type Props = {
+  car: Data;
+  color: string;
+};
+
+function ColorCarList(props: Props) {
+  const router = useRouter();
 
   function renderSquare() {
-    return selectedCarInfo.colors.map((el) => {
+    return props.car.colors.map((el) => {
       if (
-        selectedCarInfo.colors.indexOf(el) ===
-        Math.round(selectedCarInfo.colors.length / 2 - 1)
+        props.car.colors.indexOf(el) ===
+        Math.round(props.car.colors.length / 2 - 1)
       ) {
         return (
           <div key={el.id}>
@@ -27,7 +29,9 @@ function ColorCarList() {
       } else {
         return (
           <div key={el.id}>
-            <Square onClick={() => dispatch(setCarColor(el.id))}>
+            <Square
+              onClick={() => router.push(`/selected/${props.car.id}/${el.id}`)}
+            >
               <img src={el.image} alt="car" />
             </Square>
           </div>
@@ -41,7 +45,7 @@ function ColorCarList() {
       <div>
         <ArrowButton
           onClick={() => {
-            dispatch(setCarColor(selectedCarInfo.colors[0].id));
+            router.push(`/selected/${props.car.id}/${props.car.colors[0].id}`);
           }}
         >
           <BsArrowLeft style={{ fontSize: 20, color: "white" }} />
@@ -52,7 +56,7 @@ function ColorCarList() {
       <div>
         <ArrowButton
           onClick={() => {
-            dispatch(dispatch(setCarColor(selectedCarInfo.colors[2].id)));
+            router.push(`/selected/${props.car.id}/${props.car.colors[2].id}`);
           }}
         >
           <BsArrowRight style={{ fontSize: 20, color: "white" }} />
