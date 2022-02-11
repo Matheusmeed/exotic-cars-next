@@ -33,7 +33,7 @@ function CarList({ cars }: Props) {
                   colors: car.colors,
                 })
               );
-              router.push(`/selected/${car.id}`);
+              router.push(`/selected/${car.id}/01`);
             }}
             brand={car.brand}
             name={car.name}

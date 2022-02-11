@@ -12,28 +12,31 @@ import {
 } from "shared/styles/SelectedCarPage";
 import { ColorCarList, Header } from "components";
 import { RootState } from "store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
+import { getCars } from "shared/services/cars";
+import { CarsType, Data } from "@types";
+import { useEffect } from "react";
+import { setSelectedCar } from "store/Stock.store";
 
-function SelectedCar() {
+type Props = {
+  car: Data;
+};
+
+function SelectedCar({ car }: Props) {
   const router = useRouter();
-  const selectedCarInfo = useSelector(
-    (state: RootState) => state.stock.selectedCarInfo
-  );
 
   return (
     <>
       <Header />
       <Container>
         <CarHeader>
-          <img src={selectedCarInfo.logo} alt="logo" />
+          <img src={car.logo} alt="logo" />
           <InfoDiv>
-            <h1
-              style={{ margin: 0 }}
-            >{`${selectedCarInfo.brand} ${selectedCarInfo.name}`}</h1>
-            <Price>${selectedCarInfo.price}/day</Price>
+            <h1 style={{ margin: 0 }}>{`${car.brand} ${car.name}`}</h1>
+            <Price>${car.price}/day</Price>
           </InfoDiv>
         </CarHeader>
         <CarDiv>
@@ -51,11 +54,7 @@ function SelectedCar() {
           </div>
           <CarImgDiv>
             <img
-              src={
-                selectedCarInfo.colors[
-                  Math.round(selectedCarInfo.colors.length / 2 - 1)
-                ].image
-              }
+              src={car.colors[Math.round(car.colors.length / 2 - 1)].image}
               alt="carro"
             />
             <div>
@@ -69,33 +68,35 @@ function SelectedCar() {
           </CarImgDiv>
           <CarColorDiv>
             <div>
-              <h1>
-                {
-                  selectedCarInfo.colors[
-                    Math.round(selectedCarInfo.colors.length / 2 - 1)
-                  ].id
-                }
-              </h1>
-              <h3>
-                {
-                  selectedCarInfo.colors[
-                    Math.round(selectedCarInfo.colors.length / 2 - 1)
-                  ].color
-                }
-              </h3>
+              <h1>{car.colors[Math.round(car.colors.length / 2 - 1)].id}</h1>
+              <h3>{car.colors[Math.round(car.colors.length / 2 - 1)].color}</h3>
             </div>
           </CarColorDiv>
         </CarDiv>
-        <ColorCarList />
+        {/* <ColorCarList /> */}
       </Container>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps = async (context: { params: { id: string } }) => {
+  const id = Number(context.params.id);
+  const cars = await getCars();
+  const car = cars.data[id - 1];
+
+  console.log(car);
+
   return {
-    props: {},
+    props: { car },
+    revalidate: 60000,
   };
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { id: "1", color: "01" } }],
+    fallback: "blocking", // false or 'blocking'
+  };
+}
 
 export default SelectedCar;
