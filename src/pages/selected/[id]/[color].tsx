@@ -101,7 +101,7 @@ export const getStaticProps = async (context: {
 
   return {
     props: { car, color },
-    revalidate: 43200000,
+    revalidate: 100000,
   };
 };
 
