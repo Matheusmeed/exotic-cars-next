@@ -1,4 +1,4 @@
-import { CarsType, Data } from "@types";
+import { CarsType } from "@types";
 import api from "./api";
 
 export async function getCars() {
