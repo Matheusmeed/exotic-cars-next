@@ -11,15 +11,10 @@ import {
   Price,
 } from "shared/styles/SelectedCarPage";
 import { ColorCarList, Header } from "components";
-import { RootState } from "store";
-import { useDispatch, useSelector } from "react-redux";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
 import { getCars } from "shared/services/cars";
-import { CarsType, Data } from "@types";
-import { useEffect } from "react";
-import { setSelectedCar } from "store/Stock.store";
+import { Data } from "@types";
 
 type Props = {
   car: Data;
@@ -82,8 +77,16 @@ function SelectedCar({ car, color }: Props) {
           </CarImgDiv>
           <CarColorDiv>
             <div>
-              <h1>{car.colors[Math.round(car.colors.length / 2 - 1)].id}</h1>
-              <h3>{car.colors[Math.round(car.colors.length / 2 - 1)].color}</h3>
+              <h1>
+                {color === "03"
+                  ? car.colors[0].id
+                  : car.colors[Number(color)].id}
+              </h1>
+              <h3>
+                {color === "03"
+                  ? car.colors[0].color
+                  : car.colors[Number(color)].color}
+              </h3>
             </div>
           </CarColorDiv>
         </CarDiv>
