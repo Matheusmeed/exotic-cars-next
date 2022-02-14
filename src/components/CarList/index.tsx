@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import { CarsType } from "@types";
-import { setSelectedCar } from "store/Stock.store";
 import { CarCard } from "components/index";
 import { group } from "assets";
 import { Container, ScrollButton } from "./styles";
@@ -12,7 +10,6 @@ type Props = {
 };
 
 function CarList({ cars }: Props) {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   return (
@@ -22,17 +19,6 @@ function CarList({ cars }: Props) {
           <CarCard
             key={car.id}
             onClick={() => {
-              dispatch(
-                setSelectedCar({
-                  brand: car.brand,
-                  name: car.name,
-                  price: car.price,
-                  image: car.image,
-                  id: car.id,
-                  logo: car.logo,
-                  colors: car.colors,
-                })
-              );
               router.push(`/selected/${car.id}/01`);
             }}
             brand={car.brand}
