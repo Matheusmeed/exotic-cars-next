@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import { Container } from "shared/styles/MainPage";
 import { CarList, Header } from "components";
 import { getCars } from "shared/services/cars";
@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { cars },
-    revalidate: 86400000,
+    revalidate: 43200000,
   };
 };
 

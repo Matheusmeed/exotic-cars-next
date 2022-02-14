@@ -1,4 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { locationIcon, calendarIcon, searchIcon } from "assets";
+import { BsSearch } from "react-icons/bs";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   Button,
   ButtonTitle,
@@ -11,11 +16,6 @@ import {
   Title,
   Title2,
 } from "./styles";
-import { locationIcon, calendarIcon, searchIcon } from "assets";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import { BsSearch } from "react-icons/bs";
-import Image from "next/image";
-import { useRouter } from "next/router";
 
 function Header() {
   const router = useRouter();

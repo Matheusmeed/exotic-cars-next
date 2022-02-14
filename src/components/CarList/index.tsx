@@ -1,8 +1,8 @@
-import { CarsType } from "@types";
-import { CarCard } from "components/index";
-import { group } from "assets";
 import { Container, ScrollButton } from "./styles";
+import { CarCard } from "components/index";
 import { useRouter } from "next/router";
+import { CarsType } from "@types";
+import { group } from "assets";
 import Image from "next/image";
 
 type Props = {

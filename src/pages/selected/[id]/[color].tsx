@@ -60,12 +60,7 @@ function SelectedCar({ car, color }: Props) {
             </BackButton>
           </div>
           <CarImgDiv>
-            <img
-              src={renderImg()}
-              // car.colors[Math.round(car.colors.length / 2 - 1)].image
-
-              alt="carro"
-            />
+            <img src={renderImg()} alt="carro" />
             <div>
               <BookButton>
                 Book now
@@ -106,14 +101,24 @@ export const getStaticProps = async (context: {
 
   return {
     props: { car, color },
-    revalidate: 60000,
+    revalidate: 43200000,
   };
 };
 
 export async function getStaticPaths() {
+  let paths: { params: { id: string; color: string } }[] = [];
+  const cars = await getCars();
+  const data = cars.data;
+
+  data.forEach((car) => {
+    car.colors.map((color) => {
+      paths.push({ params: { id: car.id.toString(), color: color.id } });
+    });
+  });
+
   return {
-    paths: [{ params: { id: "1", color: "01" } }],
-    fallback: "blocking", // false or 'blocking'
+    paths: paths,
+    fallback: false,
   };
 }
 

@@ -3,7 +3,6 @@ import { ArrowButton, Container, MainSquare, Square } from "./styles";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Data, IColors } from "@types";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 type Props = {
   car: Data;
@@ -12,18 +11,13 @@ type Props = {
 
 function ColorCarList(props: Props) {
   const router = useRouter();
-  const [ColorsArr, setColorsArr] = useState<IColors[]>([]);
 
   function renderSquare() {
     let newArr: IColors[] = [];
 
-    if (ColorsArr.length) {
-      newArr = ColorsArr;
-    } else {
-      props.car.colors.forEach((color) => {
-        newArr.push(color);
-      });
-    }
+    props.car.colors.forEach((color) => {
+      newArr.push(color);
+    });
 
     newArr.forEach((color: IColors) => {
       const initialColor = { color: "", id: "", image: "" };
@@ -73,7 +67,6 @@ function ColorCarList(props: Props) {
         newArr[2] = last;
       }
     });
-    console.log(newArr);
     return (
       <>
         <div key={newArr[0].id}>
